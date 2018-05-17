@@ -9,6 +9,8 @@
 #define TRAVEL_S 3
 #define TOTAL (int)((TRAVEL_S*1000*1000)/DELAY_US)
 
+#define PULSE_DELAY_US 2
+
 void setup(){
   pinMode(X_STEP_PIN,OUTPUT);
   pinMode(X_DIR_PIN,OUTPUT);
@@ -32,7 +34,7 @@ void loop(){
 
 void oneshot(){
  	digitalWrite(X_STEP_PIN,HIGH);
-  	delayMicroseconds(2);
+  	delayMicroseconds(PULSE_DELAY_US);
   	digitalWrite(X_STEP_PIN,LOW);
-  	delayMicroseconds(2);
+  	delayMicroseconds(PULSE_DELAY_US);
 }

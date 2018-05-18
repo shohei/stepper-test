@@ -8,7 +8,7 @@
 #define X_EN_PIN 12 
 
 #define TRAVEL_S 3
-#define TOTAL 300000
+#define TOTAL 3000
 
 #define PULSE_DELAY_US 2
 
@@ -29,6 +29,7 @@ void oneshot(){
   delayMicroseconds(PULSE_DELAY_US);
 }
 
+
 void loop(){
   Serial.println("CW");
   digitalWrite(X_DIR_PIN,HIGH);
@@ -36,6 +37,7 @@ void loop(){
   for(long i=0;i<TOTAL;i++){
   	oneshot();
   	delayMicroseconds(DELAY_US);
+    if (i%1000==0) Serial.println("processing");
   }
 
   Serial.println("CCW");
@@ -44,6 +46,7 @@ void loop(){
   for(long i=0;i<TOTAL;i++){
   	oneshot();
   	delayMicroseconds(DELAY_US);
+    if (i%1000==0) Serial.println("processing");
   }
 }
 

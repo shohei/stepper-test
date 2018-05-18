@@ -27,16 +27,24 @@ void oneshot(){
   delayMicroseconds(PULSE_DELAY_US);
   digitalWrite(X_STEP_PIN,LOW);
   delayMicroseconds(PULSE_DELAY_US);
+
+  delayMicroseconds(DELAY_US);
 }
 
+void oneshot2(){
+  digitalWrite(X_STEP_PIN,HIGH);
+  delayMicroseconds((int)(DELAY_US/2));
+  digitalWrite(X_STEP_PIN,LOW);
+  delayMicroseconds((int)(DELAY_US/2));
+}
 
 void loop(){
   Serial.println("CW");
   digitalWrite(X_DIR_PIN,HIGH);
   digitalWrite(LED_BUILTIN, HIGH);
   for(long i=0;i<TOTAL;i++){
-  	oneshot();
-  	delayMicroseconds(DELAY_US);
+  	// oneshot();
+    oneshot2();
     if (i%1000==0) Serial.println("processing");
   }
 
@@ -44,8 +52,8 @@ void loop(){
   digitalWrite(X_DIR_PIN,LOW);
   digitalWrite(LED_BUILTIN, LOW);
   for(long i=0;i<TOTAL;i++){
-  	oneshot();
-  	delayMicroseconds(DELAY_US);
+  	// oneshot();
+    oneshot2();
     if (i%1000==0) Serial.println("processing");
   }
 }

@@ -17,13 +17,22 @@ void setup(){
   pinMode(X_STEP_PIN,OUTPUT);
   pinMode(X_DIR_PIN,OUTPUT);
   pinMode(X_EN_PIN,OUTPUT);
+  pinMode(LED_BUILTIN,OUTPUT);
 
   digitalWrite(X_EN_PIN,LOW);
+}
+
+void oneshot(){
+  digitalWrite(X_STEP_PIN,HIGH);
+  delayMicroseconds(PULSE_DELAY_US);
+  digitalWrite(X_STEP_PIN,LOW);
+  delayMicroseconds(PULSE_DELAY_US);
 }
 
 void loop(){
   Serial.println("CW");
   digitalWrite(X_DIR_PIN,HIGH);
+  digitalWrite(LED_BUILTIN, HIGH);
   for(long i=0;i<TOTAL;i++){
   	oneshot();
   	delayMicroseconds(DELAY_US);
@@ -31,15 +40,10 @@ void loop(){
 
   Serial.println("CCW");
   digitalWrite(X_DIR_PIN,LOW);
+  digitalWrite(LED_BUILTIN, LOW);
   for(long i=0;i<TOTAL;i++){
   	oneshot();
   	delayMicroseconds(DELAY_US);
   }
 }
 
-void oneshot(){
- 	digitalWrite(X_STEP_PIN,HIGH);
-  delayMicroseconds(PULSE_DELAY_US);
-  digitalWrite(X_STEP_PIN,LOW);
-  delayMicroseconds(PULSE_DELAY_US);
-}
